@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: customers_open
+    description: "The Customers table with PII masked for general access"
+    columns:
+      - name: id
+        description: "The primary key of the table"
+        tests:
+          - unique
+          - not_null
+      - name: city
+        description: "The city this customer resides in"
+      - name: types_of_contacts
+        description: "The count of distinct contact types that this customer has"  
+      - name: count_of_contacts
+        description: "The total count of contacts that this customer has"
+        

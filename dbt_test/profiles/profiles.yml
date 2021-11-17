@@ -1,0 +1,12 @@
+dbt_test:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: flask
+      password: not_the_password
+      port: 5432
+      dbname: flask_db
+      schema: flask_app
+      threads: 4

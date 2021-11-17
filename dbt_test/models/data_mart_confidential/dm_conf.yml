@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: customers_conf
+    description: "The Customers table with PII exposed, confidential access only"
+    columns:
+      - name: id
+        description: "The primary key of the table"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "The Customer's first name"
+        tags: ['first_name']
+      - name: last_name
+        description: "The Customer's last name"
+        tags: ['last_name']
+      - name: city
+        description: "The city this customer resides in"
+      - name: types_of_contacts
+        description: "The count of distinct contact types that this customer has"  
+      - name: count_of_contacts
+        description: "The total count of contacts that this customer has"

@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+  - name: source_schema
+    database: flask_db
+    tables:
+      - name: customers
+        description: "Customer data from the source"
+        columns:
+          - &id_column
+            name: id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+            description: "The customer's first name"
+            tags: ['first_name']
+          - name: last_name
+            description: "The customer's last name"
+            tags: ['last_name']
+          - name: city
+            description: "The city this customer lives in"
+          
+      - name: contacts
+        description: "Customer contact info from source"
+        columns:
+          - *id_column
+          - name: customer_id
+            description: "The id of the customer this contact info belongs to"
+            tests:
+              - relationships:
+                  to: source('source_schema', 'customers')
+                  field: id
+          - name: type
+            description: "The method by which this contact will be utilized"
+            tests:
+              - accepted_values:
+                  values: ['phone', 'email', 'twitter', 'whatsapp', 'facebook', 'snapchat']
+          - name: contact
+            description: "The identifier for how to contact this particular customer using this contact type"
+            tests:
+              - unique
+              - not_null
+        
